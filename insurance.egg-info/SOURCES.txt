@@ -1,5 +1,7 @@
 README.md
 setup.py
+Insurance/__init__.py
+Insurance/config.py
 insurance.egg-info/PKG-INFO
 insurance.egg-info/SOURCES.txt
 insurance.egg-info/dependency_links.txt
