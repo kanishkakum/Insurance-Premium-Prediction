@@ -1,0 +1,7 @@
+README.md
+setup.py
+insurance.egg-info/PKG-INFO
+insurance.egg-info/SOURCES.txt
+insurance.egg-info/dependency_links.txt
+insurance.egg-info/requires.txt
+insurance.egg-info/top_level.txt
