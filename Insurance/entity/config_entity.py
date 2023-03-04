@@ -2,11 +2,9 @@ import os,sys
 from insurance.exception import InsuranceException
 from insurance.logger import logging
 from datetime import datetime
-
 FILE_NAME = "insurance.csv"
 TRAIN_FILE_NAME = "train.csv"
 TEST_FILE_NAME = "test.csv"
-
 
 class TrainingPipelineConfig:
 
@@ -29,25 +27,16 @@ class DataIngestionConfig:
             self.test_file_path = os.path.join(self.data_ingestion_dir,"dataset",TEST_FILE_NAME)
             self.test_size = 0.2
         except Exception  as e:
-            raise SensorException(e,sys)     
+            raise InsuranceException(e,sys)     
 
     def to_dict(self,)->dict:
         try:
             return self.__dict__
         except Exception  as e:
-            raise InsuranceException(e,sys) 
+            raise InsuranceException(e,sys)     
 
-class DataValidation:
-    pass
-
-class DataTransformtion:
-    pass
-
-class ModelTrainer:
-    pass
-
-class ModelEvaluation:
-    pass
-
-class ModelPusher:
-    pass
+class DataValidationConfig:...
+class DataTransformationConfig:...
+class ModelTrainerConfig:...
+class ModelEvaluationConfig:...
+class ModelPusherConfig:...

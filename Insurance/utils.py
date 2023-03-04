@@ -1,10 +1,8 @@
 import pandas as pd
-from Insurance.logger import logging
-from Insurance.exception import InsuranceException
-from Insurance.config import mongo_client
+from insurance.logger import logging
+from insurance.exception import InsuranceException
+from insurance.config import mongo_client
 import os,sys
-import numpy as np
-
 
 def get_collection_as_dataframe(database_name:str,collection_name:str)->pd.DataFrame:
     """

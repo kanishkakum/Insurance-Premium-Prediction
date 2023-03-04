@@ -6,17 +6,8 @@ class DataIngestionArtifact:
     train_file_path:str 
     test_file_path:str
 
-class DataValidation:
-    pass
-
-class DataTransformtion:
-    pass
-
-class ModelTrainer:
-    pass
-
-class ModelEvaluation:
-    pass
-
-class ModelPusher:
-    pass
+class DataValidationArtifact:...
+class DataTransformationArtifact:...
+class ModelTrainerArtifact:...
+class ModelEvaluationArtifact:...
+class ModelPusherArtifact:...
