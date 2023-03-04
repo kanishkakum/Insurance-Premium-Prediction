@@ -1,4 +1,4 @@
-from insurance.logger import logging
+from Insurance.logger import logging
 from insurance.exception import InsuranceException
 from insurance.utils import get_collection_as_dataframe
 import sys,os
