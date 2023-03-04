@@ -2,7 +2,7 @@ import pymongo
 import pandas as pd
 import json
 import pymongo
-from Insurance.config import mongo_client
+from insurance.config import mongo_client
 # Provide the mongodb localhost url to connect python to mongodb.
 # client = pymongo.MongoClient("mongodb://localhost:27017/neurolabDB")
 
