@@ -60,8 +60,8 @@ class DataTransformation:
             label_encoder.fit(target_feature_train_df)
 
             #transformation on target columns
-            target_feature_train_arr = label_encoder.transform(target_feature_train_df)
-            target_feature_test_arr = label_encoder.transform(target_feature_test_df)
+            target_feature_train_arr = label_encoder.fit_transform(target_feature_train_df)
+            target_feature_test_arr = label_encoder.fit_transform(target_feature_test_df)
 
             transformation_pipleine = DataTransformation.get_data_transformer_object()
             transformation_pipleine.fit(input_feature_train_df)
