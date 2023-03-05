@@ -1,9 +1,11 @@
 README.md
 setup.py
 insurance/__init__.py
+insurance/batch_prediction.py
 insurance/config.py
 insurance/exception.py
 insurance/logger.py
+insurance/predictor.py
 insurance/utils.py
 insurance.egg-info/PKG-INFO
 insurance.egg-info/SOURCES.txt
@@ -21,4 +23,5 @@ insurance/entity/__init__.py
 insurance/entity/artifact_entity.py
 insurance/entity/config_entity.py
 insurance/pipeline/__init__.py
+insurance/pipeline/batch_prediction.py
 insurance/pipeline/training_pipeline.py
