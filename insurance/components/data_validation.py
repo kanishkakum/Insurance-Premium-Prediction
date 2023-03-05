@@ -1,13 +1,13 @@
-from sensor.entity import artifact_entity,config_entity
-from sensor.exception import SensorException
-from sensor.logger import logging
+from insurance.entity import artifact_entity,config_entity
+from insurance.exception import SensorException
+from insurance.logger import logging
 from scipy.stats import ks_2samp
 from typing import Optional
 import os,sys 
 import pandas as pd
-from sensor import utils
+from insurance import utils
 import numpy as np
-from sensor.config import TARGET_COLUMN
+from insurance.config import TARGET_COLUMN
 
 
 
@@ -24,7 +24,7 @@ class DataValidation:
             self.data_ingestion_artifact=data_ingestion_artifact
             self.validation_error=dict()
         except Exception as e:
-            raise SensorException(e, sys)
+            raise InsuranceException(e, sys)
 
 
 
@@ -53,7 +53,7 @@ class DataValidation:
                 return None
             return df
         except Exception as e:
-            raise SensorException(e, sys)
+            raise InsuranceException(e, sys)
 
     def is_required_columns_exists(self,base_df:pd.DataFrame,current_df:pd.DataFrame,report_key_name:str)->bool:
         try:
@@ -72,7 +72,7 @@ class DataValidation:
                 return False
             return True
         except Exception as e:
-            raise SensorException(e, sys)
+            raise InsuranceException(e, sys)
 
     def data_drift(self,base_df:pd.DataFrame,current_df:pd.DataFrame,report_key_name:str):
         try:
@@ -103,7 +103,7 @@ class DataValidation:
 
             self.validation_error[report_key_name]=drift_report
         except Exception as e:
-            raise SensorException(e, sys)
+            raise InsuranceException(e, sys)
 
     def initiate_data_validation(self)->artifact_entity.DataValidationArtifact:
         try:
@@ -152,4 +152,4 @@ class DataValidation:
             logging.info(f"Data validation artifact: {data_validation_artifact}")
             return data_validation_artifact
         except Exception as e:
-            raise SensorException(e, sys)
+            raise InsuranceException(e, sys)

@@ -47,6 +47,7 @@ class DataValidationConfig:
         self.base_file_path = os.path.join("insurance_main_dataset.csv")
 
 class DataTransformationConfig:
+    
 
     def __init__(self,training_pipeline_config:TrainingPipelineConfig):
         self.data_transformation_dir = os.path.join(training_pipeline_config.artifact_dir , "data_transformation")
