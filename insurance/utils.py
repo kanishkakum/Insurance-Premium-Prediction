@@ -3,6 +3,9 @@ from insurance.logger import logging
 from insurance.exception import InsuranceException
 from insurance.config import mongo_client
 import os,sys
+import yaml
+import numpy as np
+import dill
 
 def get_collection_as_dataframe(database_name:str,collection_name:str)->pd.DataFrame:
     """
@@ -25,6 +28,7 @@ def get_collection_as_dataframe(database_name:str,collection_name:str)->pd.DataF
         return df
     except Exception as e:
         raise InsuranceException(e, sys)
+    
 
 def write_yaml_file(file_path,data:dict):
     try:
@@ -90,4 +94,4 @@ def load_numpy_array_data(file_path: str) -> np.array:
         with open(file_path, "rb") as file_obj:
             return np.load(file_obj)
     except Exception as e:
-        raise InsuranceException(e, sys) from e        
+        raise InsuranceException(e, sys) from e

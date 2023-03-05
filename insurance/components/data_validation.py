@@ -1,5 +1,5 @@
 from insurance.entity import artifact_entity,config_entity
-from insurance.exception import SensorException
+from insurance.exception import InsuranceException
 from insurance.logger import logging
 from scipy.stats import ks_2samp
 from typing import Optional
@@ -25,19 +25,20 @@ class DataValidation:
             self.validation_error=dict()
         except Exception as e:
             raise InsuranceException(e, sys)
-
-
+        
+    
 
     def drop_missing_values_columns(self,df:pd.DataFrame,report_key_name:str)->Optional[pd.DataFrame]:
         """
         This function will drop column which contains missing value more than specified threshold
+
         df: Accepts a pandas dataframe
         threshold: Percentage criteria to drop a column
         =====================================================================================
         returns Pandas DataFrame if atleast a single column is available after missing columns drop else None
         """
         try:
-
+            
             threshold = self.data_validation_config.missing_threshold
             null_report = df.isna().sum()/df.shape[0]
             #selecting column name which contains null
@@ -54,10 +55,10 @@ class DataValidation:
             return df
         except Exception as e:
             raise InsuranceException(e, sys)
-
+    #     print("dsgfg")
     def is_required_columns_exists(self,base_df:pd.DataFrame,current_df:pd.DataFrame,report_key_name:str)->bool:
         try:
-
+           
             base_columns = base_df.columns
             current_columns = current_df.columns
 
@@ -66,7 +67,7 @@ class DataValidation:
                 if base_column not in current_columns:
                     logging.info(f"Column: [{base} is not available.]")
                     missing_columns.append(base_column)
-
+            
             if len(missing_columns)>0:
                 self.validation_error[report_key_name]=missing_columns
                 return False
@@ -84,7 +85,7 @@ class DataValidation:
             for base_column in base_columns:
                 base_data,current_data = base_df[base_column],current_df[base_column]
                 #Null hypothesis is that both column data drawn from same distrubtion
-
+                
                 logging.info(f"Hypothesis {base_column}: {base_data.dtype}, {current_data.dtype} ")
                 same_distribution =ks_2samp(base_data,current_data)
 
@@ -124,7 +125,7 @@ class DataValidation:
             train_df = self.drop_missing_values_columns(df=train_df,report_key_name="missing_values_within_train_dataset")
             logging.info(f"Drop null values colums from test df")
             test_df = self.drop_missing_values_columns(df=test_df,report_key_name="missing_values_within_test_dataset")
-
+            
             exclude_columns = [TARGET_COLUMN]
             base_df = utils.convert_columns_float(df=base_df, exclude_columns=exclude_columns)
             train_df = utils.convert_columns_float(df=train_df, exclude_columns=exclude_columns)
@@ -142,7 +143,7 @@ class DataValidation:
             if test_df_columns_status:
                 logging.info(f"As all column are available in test df hence detecting data drift")
                 self.data_drift(base_df=base_df, current_df=test_df,report_key_name="data_drift_within_test_dataset")
-
+          
             #write the report
             logging.info("Write reprt in yaml file")
             utils.write_yaml_file(file_path=self.data_validation_config.report_file_path,
@@ -153,3 +154,4 @@ class DataValidation:
             return data_validation_artifact
         except Exception as e:
             raise InsuranceException(e, sys)
+

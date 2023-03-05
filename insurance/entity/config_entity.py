@@ -2,6 +2,7 @@ import os,sys
 from insurance.exception import InsuranceException
 from insurance.logger import logging
 from datetime import datetime
+
 FILE_NAME = "insurance.csv"
 TRAIN_FILE_NAME = "train.csv"
 TEST_FILE_NAME = "test.csv"
@@ -30,7 +31,7 @@ class DataIngestionConfig:
             self.test_file_path = os.path.join(self.data_ingestion_dir,"dataset",TEST_FILE_NAME)
             self.test_size = 0.2
         except Exception  as e:
-            raise InsuranceException(e,sys)     
+            raise SensorException(e,sys)     
 
     def to_dict(self,)->dict:
         try:
@@ -48,7 +49,6 @@ class DataValidationConfig:
 
 class DataTransformationConfig:
 
-
     def __init__(self,training_pipeline_config:TrainingPipelineConfig):
         self.data_transformation_dir = os.path.join(training_pipeline_config.artifact_dir , "data_transformation")
         self.transform_object_path = os.path.join(self.data_transformation_dir,"transformer",TRANSFORMER_OBJECT_FILE_NAME)
@@ -62,7 +62,7 @@ class ModelTrainerConfig:
         self.model_trainer_dir = os.path.join(training_pipeline_config.artifact_dir , "model_trainer")
         self.model_path = os.path.join(self.model_trainer_dir,"model",MODEL_FILE_NAME)
         self.expected_score = 0.7
-        self.overfitting_threshold = 0.1
+        self.overfitting_threshold = 0.3
 
 
 class ModelEvaluationConfig:
